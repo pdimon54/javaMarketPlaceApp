@@ -1,6 +1,7 @@
-package com.company;
+package com.company.Item;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
 
@@ -10,7 +11,15 @@ public class User {
     private  String lastName;
     private int money;
 
-    private ArrayList<Product> userProductList;//list of buying products
+    private List<Product> userProductList = new ArrayList<>();//list of buying products
+
+    public List<Product> getUserProductList() {
+        return userProductList;
+    }
+
+    public void setUserProductList(List<Product> userProductList) {
+        this.userProductList = userProductList;
+    }
 
     public User(String firstName, String lastName, int money) {
         this.userProductList = new ArrayList<>();

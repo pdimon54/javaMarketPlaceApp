@@ -1,6 +1,7 @@
-package com.company;
+package com.company.Item;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
 
@@ -9,7 +10,15 @@ public class Product {
     private String name;
     private int price;
 
-    private ArrayList<User> thisProductBuyers;
+    private List<User> thisProductBuyers = new ArrayList<>();
+
+    public List<User> getThisProductBuyers() {
+        return thisProductBuyers;
+    }
+
+    public void setThisProductBuyers(List<User> thisProductBuyers) {
+        this.thisProductBuyers = thisProductBuyers;
+    }
 
     public Product(String name, int price) {
         this.id = UUID.randomUUID().toString();

@@ -1,5 +1,8 @@
-package com.company;
+package com.company.DB;
 
+
+import com.company.Item.Product;
+import com.company.Item.User;
 
 import java.util.*;
 
@@ -9,19 +12,36 @@ public class DBLists {
     private static List<User> userList = new ArrayList<>();// list of users
     private static List<Product> productList = new ArrayList<>();//list of products
     private static Set<String> userID = new HashSet<>();//list user ID
-    private static Set<String> productID = new HashSet<>();
-    private static Map<String ,List<Product>> userShoppingList = new HashMap<>();//user buying last
-    private static Map<String ,List<User>> buyersList = new HashMap<>();//users who buy this product
+    private static Set<String> productID = new HashSet<>();//list product ID
 
+    public static <E> void addItem(E elem,Collection <E> collection){
+        collection.add(elem);
+    }
 
-    public static void  addNewUser(User user){
-        userList.add(user);
-        userID.add(user.getId());
+    public static <E> void deleteItem(E elem, Collection<E> collection){
+        collection.remove(elem);
     }
-    public static void addNewProduct(Product product){
-        productList.add(product);
-        productID.add(product.getId());
+    public static <E> void update(E elem, Collection<E> collection,int option){
+        if(option == 0){}//buying
+        if(option == 1){}
     }
+
+    public static List<User> getUserList() {
+        return  userList;
+    }
+
+    public static List<Product> getProductList() {
+        return productList;
+    }
+
+    public static Set<String> getUserID() {
+        return userID;
+    }
+
+    public static Set<String> getProductID() {
+        return productID;
+    }
+
 
     public static void showUserList(){
         for (User user: userList) {
@@ -60,19 +80,13 @@ public class DBLists {
             System.out.println("Doesn`t have this product ");
             return false;
         }
-        //
+        return true;
 
     }
     /*for (Map.Entry<String, User> entry : buyersList.entrySet()) {
             System.out.println(entry.getKey()+" : "+entry.getValue().getFirstName());
         }*/
-    public static void deleteUser(User user){
 
-        userList.remove(user);
-        userShoppingList.remove(user.getId());
-        buyersList.remove(user.getId());
-
-    }
 
 
 }
