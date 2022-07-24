@@ -5,7 +5,7 @@ import com.company.Item.Product;
 import com.company.Item.User;
 import com.company.Interface.Repo;
 
-public class UserRepo implements Repo<User> {
+public class UserRepo implements Repo<User> {               //class for connecting User and DB
 
     @Override
     public void addElement(User elem) {

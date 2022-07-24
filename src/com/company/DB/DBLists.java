@@ -7,7 +7,7 @@ import com.company.Item.User;
 import java.util.*;
 
 
-public class DBLists {
+public class DBLists {//Our DB
 
     private static List<User> userList = new ArrayList<>();// list of users
     private static List<Product> productList = new ArrayList<>();//list of products
@@ -20,10 +20,6 @@ public class DBLists {
 
     public static <E> void deleteItem(E elem, Collection<E> collection){
         collection.remove(elem);
-    }
-    public static <E> void update(E elem, Collection<E> collection,int option){
-        if(option == 0){}//buying
-        if(option == 1){}
     }
 
     public static List<User> getUserList() {
@@ -63,30 +59,5 @@ public class DBLists {
             System.out.println("=====================================");
         }
     }
-
-    public static boolean buyProduct(){
-        String userId;
-        String productId;
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("Users id:");
-        userId = scanner.nextLine();
-        System.out.println("Products id:");
-        productId = scanner.nextLine();
-        if(!userID.contains(userId)){
-            System.out.println("Doesn`t have this user ");
-            return false;
-        }
-        if(!productID.contains(productId)){
-            System.out.println("Doesn`t have this product ");
-            return false;
-        }
-        return true;
-
-    }
-    /*for (Map.Entry<String, User> entry : buyersList.entrySet()) {
-            System.out.println(entry.getKey()+" : "+entry.getValue().getFirstName());
-        }*/
-
-
 
 }

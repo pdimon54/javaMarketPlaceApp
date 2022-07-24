@@ -10,7 +10,5 @@ public class Menu {
         System.out.println("6)Show list of users who buy choose product");
         System.out.println("7)Buy product");
         System.out.println("8)Exit");
-
-
     }
 }

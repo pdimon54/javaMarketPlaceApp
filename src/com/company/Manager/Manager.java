@@ -13,27 +13,27 @@ public class Manager {
     UserRepo userRepo = new UserRepo();
     ProductRepo productRepo = new ProductRepo();
 
-    public void addNewUser(){
+    public void addNewUser(){                            //method added new User to DB(connect User and DB)
         String firstName,lastName;
         int money;
         Scanner scanner = new Scanner(System.in);
         System.out.println("First name:");
         firstName = scanner.nextLine();
-        while(firstName.isEmpty()) {
+        while(firstName.isEmpty()) {//null field check
             System.out.println("Nothing was entered. Please try again");
             System.out.println("First name:");
             firstName = scanner.nextLine();
         }
         System.out.println("Last name:");
         lastName = scanner.nextLine();
-        while(lastName.isEmpty()) {
+        while(lastName.isEmpty()) {                          //null field check
             System.out.println("Nothing was entered. Please try again");
             System.out.println("Last name:");
             lastName = scanner.nextLine();
         }
         System.out.println("Money:");
         money = scanner.nextInt();
-        while(money<0) {
+        while(money<0) {                                    //>0 field check
             System.out.println("Money must be > 0. Please try again");
             System.out.println("Money:");
             money = scanner.nextInt();
@@ -42,20 +42,20 @@ public class Manager {
         userRepo.addElement(user);
     }
 
-    public void addNewProduct(){
+    public void addNewProduct(){                           //added new Product to DB(connect Product and DB)
         String name;
         int price;
         Scanner scanner = new Scanner(System.in);
         System.out.println("Name:");
         name = scanner.nextLine();
-        while(name.isEmpty()) {
+        while(name.isEmpty()) {                            //null field check
             System.out.println("Nothing was entered. Please try again");
             System.out.println("Name:");
             name = scanner.nextLine();
         }
         System.out.println("Price:");
         price = scanner.nextInt();
-        while(price<0) {
+        while(price<0) {                                        //>0 field check
             System.out.println("Price must be > 0. Please try again");
             System.out.println("Price:");
             price = scanner.nextInt();
@@ -64,7 +64,7 @@ public class Manager {
         productRepo.addElement(product);
     }
 
-    public void deleteUser(){
+    public void deleteUser(){                               //delete info about User from DB(connect User and DB)
         String deleteId = checkID();
         boolean deleteFlag = false;
         for (int i = 0; i < DBLists.getUserList().size();i++) {
@@ -82,7 +82,7 @@ public class Manager {
         if(!deleteFlag)
             System.out.println("We doesnt have this user");
     }
-    public void deleteProduct(){
+    public void deleteProduct(){                                    //delete info about Product from DB(connect Product and DB)
         String deleteId = checkID();
         boolean deleteFlag = false;
         for (int i = 0;i<DBLists.getProductList().size();i++) {
@@ -100,7 +100,7 @@ public class Manager {
             System.out.println("We doesnt have this user");
     }
 
-    private String checkID() {
+    private String checkID() {                                  //check for correct input Id
         String deleteId;
         Scanner scanner = new Scanner(System.in);
         System.out.println("Write id:");
@@ -113,13 +113,13 @@ public class Manager {
         return deleteId;
     }
 
-    public void showList(String item){
+    public void showList(String item){                              //display List of Users or Products
         if(Objects.equals(item, "Users list"))
             userRepo.showElement();
         if (Objects.equals(item, "Product list"))  
             productRepo.showElement();
     }
-    public void showUserProductList(){
+    public void showUserProductList(){                              //display list of buying products
         String Id = checkID();
         for (User user:DBLists.getUserList()) {
 
@@ -133,7 +133,7 @@ public class Manager {
         }
 
     }
-    public void showProductsListUser(){
+    public void showProductsListUser(){                         //display list with info about users who buy this product
         String Id = checkID();
         for (Product product:DBLists.getProductList()) {
 
@@ -146,10 +146,9 @@ public class Manager {
                 }
             }
         }
-
     }
 
-    public void buyProduct(){
+    public void buyProduct(){                                       //method purchases product
         System.out.println("User ID");
         String userId = checkID();
         System.out.println("Product ID");
@@ -178,10 +177,5 @@ public class Manager {
                 System.out.println("We doesnt have this user");
             }
         }
-
-
-
-
-
 
 }

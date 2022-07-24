@@ -20,20 +20,16 @@ public class Main {
             input = scanner.nextLine();
 
 
-            switch (input)
-            {
-                case "1"://Add new user
+            switch (input) {
+                case "1" -> {//Add new user
                     System.out.println("1)Add new user");
                     manager.addNewUser();
-                    break;
-
-                case "2"://Add new product
+                }
+                case "2" -> {//Add new product
                     System.out.println("2)/Add new product");
                     manager.addNewProduct();
-                    break;
-
-
-                case "3" ://Show list of users
+                }
+                case "3" -> {//Show list of users
                     System.out.println("3)Show list of users");
                     manager.showList("Users list");
                     System.out.println("You want delete some user?");
@@ -41,10 +37,8 @@ public class Main {
                     String deleteUserOption = scanner.nextLine();
                     if (Objects.equals(deleteUserOption, "yes"))
                         manager.deleteUser();
-
-                    break;
-
-                case "4"://Show list of products
+                }
+                case "4" -> {//Show list of products
                     System.out.println("4)Show list of products");
                     manager.showList("Product list");
                     System.out.println("You want delete some product?");
@@ -52,30 +46,22 @@ public class Main {
                     String deleteProductOption = scanner.nextLine();
                     if (Objects.equals(deleteProductOption, "yes"))
                         manager.deleteProduct();
-
-                    break;
-
-                case "5"://Show list of users products
+                }
+                case "5" -> {//Show list of users products
                     System.out.println("5)Show list of users products");
                     manager.showUserProductList();
-                    break;
-
-                case "6"://Show list of users who buy choose product
+                }
+                case "6" -> {//Show list of users who buy choose product
                     System.out.println("6)Show list of users who buy choose product");
                     manager.showProductsListUser();
-                    break;
-
-                case "7"://Buy product
+                }
+                case "7" -> {//Buy product
                     System.out.println("7)Buy product");
                     manager.buyProduct();
-                    break;
-
-                case "8"://exit
-                    System.out.println("Thanks for using our shop!");
-                    break;
-
-                default:
-                    System.out.println("Please, choose correct option(1-8)");
+                }
+                case "8" ->//exit
+                        System.out.println("Thanks for using our shop!");
+                default -> System.out.println("Please, choose correct option(1-8)");
             }
         }
         while(!input.equals("8"));

@@ -4,7 +4,7 @@ import com.company.DB.DBLists;
 import com.company.Interface.Repo;
 import com.company.Item.Product;
 
-public class ProductRepo implements Repo<Product> {
+public class ProductRepo implements Repo<Product> {    //class for connecting Product and DB
 
     @Override
     public void addElement(Product elem) {

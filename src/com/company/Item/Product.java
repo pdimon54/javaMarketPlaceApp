@@ -10,7 +10,7 @@ public class Product {
     private String name;
     private int price;
 
-    private List<User> thisProductBuyers = new ArrayList<>();
+    private List<User> thisProductBuyers = new ArrayList<>();//list with info about users who buy this product
 
     public List<User> getThisProductBuyers() {
         return thisProductBuyers;
