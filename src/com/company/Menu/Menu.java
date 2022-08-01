@@ -46,7 +46,7 @@ public class Menu {
                 }
                 case "4" -> {//Show list of products
                     System.out.println("4)Show list of products");
-                    userManager.getList();
+                    productManager.getList();
                     System.out.println("You want delete some product?");
                     System.out.println("Write yes or no");
                     String deleteProductOption = scanner.nextLine();
