@@ -1,9 +1,6 @@
 package com.company.Item;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
-import java.util.UUID;
+import java.util.*;
 
 public class User {
     private String id;
@@ -11,18 +8,18 @@ public class User {
     private  String lastName;
     private int money;
 
-    private List<Product> userProductList = new ArrayList<>();//list of buying products
+    private Map<Product,Integer> userProductList;//list of buying products
 
-    public List<Product> getUserProductList() {
+    public Map<Product, Integer> getUserProductList() {
         return userProductList;
     }
 
-    public void setUserProductList(List<Product> userProductList) {
+    public void setUserProductList(Map<Product,Integer> userProductList) {
         this.userProductList = userProductList;
     }
 
     public User(String firstName, String lastName, int money) {
-        this.userProductList = new ArrayList<>();
+        this.userProductList = new HashMap<>();
         this.id = UUID.randomUUID().toString();
         this.firstName = firstName;
         this.lastName = lastName;

@@ -4,7 +4,7 @@ import com.company.DB.DBLists;
 import com.company.Interface.Repo;
 import com.company.Item.Product;
 
-public class ProductRepo implements Repo<Product> {    //class for connecting Product and DB
+public final class ProductRepo implements Repo<Product> {    //class for connecting Product and DB
 
     @Override
     public void addElement(Product elem) {
@@ -18,12 +18,9 @@ public class ProductRepo implements Repo<Product> {    //class for connecting Pr
         DBLists.deleteItem(elem.getId(),DBLists.getProductID());
     }
 
-    public void editElement(Product elem) {
-
-    }
 
     @Override
-    public void showElement() {
+    public void getAll() {
         DBLists.showProductList();
     }
 

@@ -5,7 +5,8 @@ import com.company.Item.Product;
 import com.company.Item.User;
 import com.company.Interface.Repo;
 
-public class UserRepo implements Repo<User> {               //class for connecting User and DB
+public final class UserRepo implements Repo<User> {               //class for connecting User and DB
+
 
     @Override
     public void addElement(User elem) {
@@ -21,7 +22,7 @@ public class UserRepo implements Repo<User> {               //class for connecti
 
     }
 
-    public void editElement(User elem,int price) {
+    public boolean editElement(User elem,int price) {
 
         for (User user : DBLists.getUserList()) {
             if (user.equals(elem)) {
@@ -29,19 +30,30 @@ public class UserRepo implements Repo<User> {               //class for connecti
                     user.setMoney(user.getMoney() - price);
                     for (Product product : DBLists.getProductList()) {
                         if (price == product.getPrice()) {
-                            user.getUserProductList().add(product);
+                            if (user.getUserProductList().containsKey(product)){
+                                user.getUserProductList().put(product,+1);
+                            }
+                            else {
+                            user.getUserProductList().put(product,1);
                             product.getThisProductBuyers().add(elem);
+                            }
+                            return true;
+
                         }
                     }
                 }
-                else
+                else{
                     System.out.println("You doesnt have money for this, try to buy another product");
+                    return false;
+                }
+
             }
 
         }
+        return false;
     }
     @Override
-    public void showElement() {
+    public void getAll() {
         DBLists.showUserList();
     }
 }

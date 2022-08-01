@@ -9,9 +9,13 @@ import com.company.Repo.UserRepo;
 import java.util.Objects;
 import java.util.Scanner;
 
-public class Manager {
-    UserRepo userRepo = new UserRepo();
-    ProductRepo productRepo = new ProductRepo();
+public class UserManager {
+
+    private final UserRepo userRepo;
+
+    public UserManager(UserRepo userRepo){
+        this.userRepo = userRepo;
+    }
 
     public void addNewUser(){                            //method added new User to DB(connect User and DB)
         String firstName,lastName;
@@ -42,27 +46,7 @@ public class Manager {
         userRepo.addElement(user);
     }
 
-    public void addNewProduct(){                           //added new Product to DB(connect Product and DB)
-        String name;
-        int price;
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("Name:");
-        name = scanner.nextLine();
-        while(name.isEmpty()) {                            //null field check
-            System.out.println("Nothing was entered. Please try again");
-            System.out.println("Name:");
-            name = scanner.nextLine();
-        }
-        System.out.println("Price:");
-        price = scanner.nextInt();
-        while(price<0) {                                        //>0 field check
-            System.out.println("Price must be > 0. Please try again");
-            System.out.println("Price:");
-            price = scanner.nextInt();
-        }
-        Product product = new Product(name,price);
-        productRepo.addElement(product);
-    }
+
 
     public void deleteUser(){                               //delete info about User from DB(connect User and DB)
         String deleteId = checkID();
@@ -82,23 +66,7 @@ public class Manager {
         if(!deleteFlag)
             System.out.println("We doesnt have this user");
     }
-    public void deleteProduct(){                                    //delete info about Product from DB(connect Product and DB)
-        String deleteId = checkID();
-        boolean deleteFlag = false;
-        for (int i = 0;i<DBLists.getProductList().size();i++) {
-            Product product = DBLists.getProductList().get(i);
-            if(product.getId().equals(deleteId)){
-                productRepo.deleteElement(product);
-                for (int n = 0;n< DBLists.getUserList().size();n++) {
-                    User user = DBLists.getUserList().get(n);
-                    user.getUserProductList().remove(product);
-                }
-                deleteFlag = true;
-            }
-        }
-        if(!deleteFlag)
-            System.out.println("We doesnt have this user");
-    }
+
 
     private String checkID() {                                  //check for correct input Id
         String deleteId;
@@ -113,18 +81,15 @@ public class Manager {
         return deleteId;
     }
 
-    public void showList(String item){                              //display List of Users or Products
-        if(Objects.equals(item, "Users list"))
-            userRepo.showElement();
-        if (Objects.equals(item, "Product list"))  
-            productRepo.showElement();
+    public void getList(){                              //display List of Users
+        userRepo.getAll();
     }
-    public void showUserProductList(){                              //display list of buying products
+    public void getUserProductList(){                              //display list of buying products
         String Id = checkID();
         for (User user:DBLists.getUserList()) {
 
             if(Objects.equals(Id, user.getId())){
-                for (Product product: user.getUserProductList()) {
+                for (Product product: user.getUserProductList().keySet()) {
                     System.out.println("Id:" + product.getId());
                     System.out.println("Name:" + product.getName());
                     System.out.println("Price:" + product.getPrice());
@@ -133,22 +98,9 @@ public class Manager {
         }
 
     }
-    public void showProductsListUser(){                         //display list with info about users who buy this product
-        String Id = checkID();
-        for (Product product:DBLists.getProductList()) {
 
-            if(Objects.equals(Id, product.getId())){
-                for (User user: product.getThisProductBuyers()) {
-                    System.out.println("Id:" + user.getId());
-                    System.out.println("First name:" + user.getFirstName());
-                    System.out.println("Last name:" + user.getLastName());
-                    System.out.println("Money:" + user.getMoney());
-                }
-            }
-        }
-    }
 
-    public void buyProduct(){                                       //method purchases product
+    public boolean buyProduct(){                                       //method purchases product
         System.out.println("User ID");
         String userId = checkID();
         System.out.println("Product ID");
@@ -169,13 +121,14 @@ public class Manager {
             for (int i = 0; i<DBLists.getUserList().size();i++){
                 User user = DBLists.getUserList().get(i);
                 if(user.getId().equals(userId)){
-                    userRepo.editElement(user,tempPrice);
-                    checkUserFlag = true;
+
+                    checkUserFlag = userRepo.editElement(user,tempPrice);
                 }
             }
             if(!checkUserFlag)
                 System.out.println("We doesnt have this user");
             }
-        }
+        return checkUserFlag && checkProductFlag;
+    }
 
 }
